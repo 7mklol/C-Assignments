@@ -1,25 +1,19 @@
 
 #define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include "contacts.h"
 
-int main(void)
-{
-	char answer;
 
-	// Declare variables here:
-	struct Name name = {{ 0 }};
-	struct Address address = { 0,{'\0'},0,{'\0'},{'\0'}};
-	struct Numbers numbers = {{'\0'},{'\0'},{ '\0' }};
+// Get and store from standard input the values for Name
+// Put your code here that defines the Contact getName function:
 
-	// Display the title
-	printf("Contact Management System\n");
-	printf("-------------------------\n");
-
-	// Contact Name Input:
+void getName(struct Name* a) {
 	printf("Please enter the contact's first name: ");
-	scanf("%s", name.firstName);
+	scanf("%s", (*a).firstName);
+	//scanf("%s", a->firstName);    arrow notation, equal 
 
+	char answer;
 	printf("Do you want to enter a middle initial(s)? (y or n): ");
 	scanf(" %c", &answer);
 
@@ -27,55 +21,64 @@ int main(void)
 	case 'Y':
 	case 'y':
 		printf("Please enter the contact's middle initial(s): ");
-		scanf("%6s", name.middleInitial);
+		scanf(" %s", (*a).middleInitial);
 		break;
-	case 'N':
-	case 'n':
+	default:
 		printf("\n");
-		break;
+		/*case 'N':
+		case 'n':
+		printf("\n");
+		break;*/
 	}
 
-	printf("Please enter the contact's last name: ");
-	scanf("%35s", name.lastName);
+	printf("Please enter the contact’s last name: ");
+	scanf("%35s", (*a).lastName);
+};
 
 
-	// Contact Address Input:
-	printf("Please enter the contact's street number: ");
-	scanf("%d", &address.streetNumber);
-	printf("Please enter the contact's street name: ");
-	scanf("%40s", address.street);
+// Get and store from standard input the values for Address
+// Put your code here that defines the Contact getAddress function:
+void getAddress(struct Address* b) {
+	printf("Please enter the contact’s street number: ");
+	scanf("%d", &(*b).streetNumber);
+	printf("Please enter the contact’s street name: ");
+	scanf("%40s", (*b).street);
 
+	char answer;
 	printf("Do you want to enter an apartment number? (y or n): ");
 	scanf(" %c", &answer);
 
 	switch (answer) {
 	case 'Y':
 	case 'y':
-		printf("Please enter the contact's apartment number: ");
-		scanf("%d", &address.apartmentNumber);
+		printf("Please enter the contact’s apartment number: ");
+		scanf("%d", &(*b).apartmentNumber);
 		break;
 	case 'N':
 	case 'n':
 		printf("\n");
 		break;
 	}
+	printf("Please enter the contact’s postal code: ");
+	scanf(" %[^\n]s", (*b).postalCode);
+	printf("Please enter the contact’s city: ");
+	scanf(" %35s", (*b).city);
+};
 
-	printf("Please enter the contact's postal code: ");
-	scanf(" %[^\n]s", address.postalCode);
-
-	printf("Please enter the contact's city: ");
-	scanf(" %s", address.city);
 
 
-	// Contact Numbers Input:
+// Get and store from standard input the values for Numbers
+// Put your code here that defines the Contact getNumbers function:
+void getNumbers(struct Numbers* c) {
+	char answer;
 	printf("Do you want to enter a cell phone number? (y or n): ");
 	scanf(" %c", &answer);
 
 	switch (answer) {
 	case 'Y':
 	case 'y':
-		printf("Please enter the contact's cell phone number: ");
-		scanf("%20s", numbers.cell);
+		printf("Please enter the contact’s cell phone number: ");
+		scanf(" %20s", (*c).cell);
 		break;
 	case 'N':
 	case 'n':
@@ -84,13 +87,13 @@ int main(void)
 	}
 
 	printf("Do you want to enter a home phone number ? (y or n): ");
-	scanf(" %c", &answer);
+	scanf("%c", &answer);
 
 	switch (answer) {
 	case 'Y':
 	case 'y':
-		printf("Please enter the contact's home phone number: ");
-		scanf("%20s", numbers.home);
+		printf("Please enter the contact’s home phone number: ");
+		scanf(" %20s", (*c).home);
 		break;
 	case 'N':
 	case 'n':
@@ -99,13 +102,13 @@ int main(void)
 	}
 
 	printf("Do you want to enter a business phone number? (y or n): ");
-	scanf(" %c", &answer);
+	scanf("%c", &answer);
 
 	switch (answer) {
 	case 'Y':
 	case 'y':
-		printf("Please enter the contact's business phone number: ");
-		scanf("%20s", numbers.business);
+		printf("Please enter the contact’s business phone number: ");
+		scanf(" %20s", (*c).business);
 		break;
 	case 'N':
 	case 'n':
@@ -113,29 +116,4 @@ int main(void)
 		break;
 	}
 
-
-	// Display Contact Summary Details
-	printf("\nContact Details\n");
-	printf("---------------\n");
-	printf("Name Details\n");
-	printf("First name: %s\n", name.firstName);
-	printf("Middle initial(s): %s\n", name.middleInitial);
-	printf("Last name: %s\n\n", name.lastName);
-	printf("Address Details\n");
-	printf("Street number: %d\n", address.streetNumber);
-	printf("Street name: %s\n", address.street);
-	printf("Apartment: %d\n", address.apartmentNumber);
-	printf("Postal code: %s\n", address.postalCode);
-	printf("City: %s\n\n", address.city);
-	printf("Phone Numbers:\n");
-	printf("Cell phone number: %s\n", numbers.cell);
-	printf("Home phone number: %s\n", numbers.home);
-	printf("Business phone number: %s\n\n", numbers.business);
-
-
-	// Display Completion Message
-	printf("Structure test for Name, Address, and Numbers Done!\n");
-
-	return 0;
-}
-
+};
