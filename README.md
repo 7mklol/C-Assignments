@@ -1,5 +1,6 @@
-# C-Assignments
+# Contact Management System
 
+A contact structure that contains other structures representing the contact Name, Address, and phone Numbers. Emphasize modularization by highly cohesive and tightly coupled tasks into modules (*.h and *.c files). This strategy will reduce redundant coding throughout all parts of the application.
 
 ## 1. Environment Configuration
 
